@@ -1,0 +1,368 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EventService API",
+    "description": "EventService application for Java Mentoring Program",
+    "version": "1.0-SNAPSHOT"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Event API",
+      "description": "Operations that related with events"
+    }
+  ],
+  "paths": {
+    "/api/v1/events/": {
+      "get": {
+        "tags": [
+            "Event API"
+        ],
+        "summary": "Get all events when 'title' is absent. Get events by title or by short piece of title when 'title' is present",
+        "operationId": "findAllEvents",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Title of event, or part of event title. Case Insensitive.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "java"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          },
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+            "Event API"
+        ],
+        "summary": "Update an event",
+        "operationId": "updateEvent",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request, data has failed validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          },
+          "404": {
+            "description": "Event not found by id"
+          },
+          "200": {
+            "description": "Successful response. Return updated event.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+            "Event API"
+        ],
+        "summary": "Create an event",
+        "operationId": "createEvent",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request, data has failed validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          },
+          "201": {
+            "description": "Successful response. Return new event.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/events/{id}": {
+      "get": {
+        "tags": [
+            "Event API"
+        ],
+        "summary": "Get event by id",
+        "operationId": "getEventById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of event",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request, invalid provided Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          },
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found by id"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+            "Event API"
+        ],
+        "summary": "Delete event by id",
+        "operationId": "deleteEvent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of event",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request, invalid provided Id",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          },
+          "204": {
+            "description": "No content, event have deleted"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Time when the error registered",
+            "format": "date-time",
+            "example": "2021-05-17T03:23:31.106+03:00"
+          },
+          "error": {
+            "type": "string",
+            "description": "Is a brief description of error",
+            "example": "Bad Request"
+          },
+          "status": {
+            "type": "integer",
+            "description": "Error status code.",
+            "format": "int32",
+            "example": 400,
+            "externalDocs": {
+              "description": "List of HTTP status codes",
+              "url": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"
+            }
+          },
+          "message": {
+            "type": "object",
+            "description": "Full description of error",
+            "example": "Bad Request. Failed on validation"
+          },
+          "path": {
+            "type": "string",
+            "description": "Url, where the user got the error",
+            "example": "uri=/api/v1/events/-1"
+          }
+        }
+      },
+      "EventDto": {
+        "required": [
+            "dateTime",
+            "eventType",
+            "place",
+            "speaker",
+            "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique event identifier",
+            "format": "int64",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "Subject of event. Title of event.",
+            "example": "Java 17 is closer than you think"
+          },
+          "place": {
+            "type": "string",
+            "description": "Event venue",
+            "example": "Staples center"
+          },
+          "speaker": {
+            "type": "string",
+            "description": "The person how will do knowledge transfer",
+            "example": "Dwayne Rock Johnson"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "The type of event. [offline, online, on-fresh-air]",
+            "example": "offline"
+          },
+          "dateTime": {
+            "type": "string",
+            "description": "The date of event",
+            "format": "date-time",
+            "example": "2021-05-20T15:00:00+03:00"
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "Links": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/Link"
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "hreflang": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "deprecation": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "templated": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

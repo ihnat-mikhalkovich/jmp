@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jmp</artifactId>
+        <groupId>com.epam.learn</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>restapi</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>event-service-api</module>
+        <module>event-service-dto</module>
+        <module>event-service-impl</module>
+        <module>event-service-rest</module>
+    </modules>
+
+    <properties>
+
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
+        <lombok.version>1.18.20</lombok.version>
+        <spring-boot.version>2.4.5</spring-boot.version>
+        <springdoc-openapi-ui.version>1.5.8</springdoc-openapi-ui.version>
+
+        <api.verison>1.0-SNAPSHOT</api.verison>
+        <dto.verison>1.0-SNAPSHOT</dto.verison>
+        <impl.verison>1.0-SNAPSHOT</impl.verison>
+        <rest.verison>1.0-SNAPSHOT</rest.verison>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-hateoas</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.learn</groupId>
+                <artifactId>event-service-api</artifactId>
+                <version>${api.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.learn</groupId>
+                <artifactId>event-service-dto</artifactId>
+                <version>${dto.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.learn</groupId>
+                <artifactId>event-service-impl</artifactId>
+                <version>${impl.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.learn</groupId>
+                <artifactId>event-service-rest</artifactId>
+                <version>${rest.verison}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>
+                                com.epam.learn.restapi.Application
+                            </mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>
