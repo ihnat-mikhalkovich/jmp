@@ -1,0 +1,1 @@
+docker run --rm -ti -d -p 9042:9042 -v .:/scripts --name mongo mongo:latest mongod --port 9042

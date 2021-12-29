@@ -1,0 +1,8 @@
+db:
+  url: mongodb://localhost:9042
+  name: main
+  collection: tasks
+
+spring:
+  main:
+    web-application-type: NONE

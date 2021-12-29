@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  mongo1:
+    hostname: mongo1
+    container_name: mongo1
+    image: mongo:latest
+    ports:
+        - 9042:9042
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--port", "9042"]
+    depends_on: 
+        - mongo2
+        - mongo3
+    volumes:
+        - .:/scripts
+  mongo2:
+    hostname: mongo2
+    container_name: mongo2
+    image: mongo:latest
+    ports:
+        - 9142:9142
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--port", "9142"]
+  mongo3:
+    hostname: mongo3
+    container_name: mongo3
+    image: mongo:latest
+    ports:
+        - 9242:9242
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--port", "9242"]
+

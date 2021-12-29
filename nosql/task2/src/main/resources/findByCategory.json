@@ -1,0 +1,80 @@
+[
+  {
+    "dateOfCreation": "2021-06-15T14:00:00+03:00",
+    "deadline": "2021-06-17T14:00:00+03:00",
+    "name": "The Cassandra Ring",
+    "description": "The task related with Cassandra database.",
+    "subtasks": [
+      {
+        "name": "Install Cassandra and use corresponding Java driver",
+        "description": ""
+      },
+      {
+        "name": "Build Cassandra cluster with 4 nodes.",
+        "description": ""
+      },
+      {
+        "name": "Balance the cluster and distribute keys.",
+        "description": ""
+      },
+      {
+        "name": "Provides screenshots of running cluster and filled tables",
+        "description": ""
+      },
+      {
+        "name": "Write performance test app which stores logs (logs can be tracked events with different structure) from your working app into Cassandra Cluster.",
+        "description": ""
+      },
+      {
+        "name": "Measure different useful statistics for log writing (throughput - avg, 95th percentile and so on).",
+        "description": ""
+      },
+      {
+        "name": "Provide simple admin operations (to edit logs) via Cassandra Java driver",
+        "description": ""
+      },
+      {
+        "name": "Use CQL to make queries for generating reports.",
+        "description": ""
+      },
+      {
+        "name": "List of desired reports and collected metrics should be provided by your mentor",
+        "description": ""
+      }
+    ],
+    "category": "cassandra"
+  },
+  {
+    "dateOfCreation": "2021-06-10T14:00:00+03:00",
+    "deadline": "2021-06-20T14:00:00+03:00",
+    "name": "Social Network with Cassandra",
+    "description": "Write simple app with a few classes reflected typical Social Network (Users, Messages, Movies, Audio tracks, Friendships etc.). Keep more than 10^9 instances for each class into Cassandra database using Cassandra DB driver. Provide simple reporting based on Cassandra Aggregation Framework",
+    "subtasks": [
+      {
+        "name": "Take the model and data from the previous task and implement backend with Cassandra (build separate tables for each kind of report). Could we use Spring solution to reduce copy-paste and light-switching of NoSQL database from Mongo to Cassandra?",
+        "description": ""
+      },
+      {
+        "name": "(+5 bonus points) use appropriate indices to improve query performance",
+        "description": ""
+      },
+      {
+        "name": "(+5 bonus points) build Cassandra cluster with 4 nodes",
+        "description": ""
+      },
+      {
+        "name": "(+5 bonus points) balance the cluster and distribute keys",
+        "description": ""
+      },
+      {
+        "name": "(+5 bonus points) tune commitlog/memtable properties to reach better performance of your insert or select operations",
+        "description": ""
+      },
+      {
+        "name": "(+5 bonus points) measure performance of query execution and prepare simple performance report.",
+        "description": ""
+      }
+    ],
+    "category": "cassandra"
+  }
+]

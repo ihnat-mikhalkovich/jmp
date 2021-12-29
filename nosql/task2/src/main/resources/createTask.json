@@ -1,0 +1,21 @@
+{
+  "dateOfCreation": "2021-06-17T18:00:00+03:00",
+  "deadline": "2021-06-22T14:00:00+03:00",
+  "name": "Social network with Neo4j",
+  "description": "Create a social network app that with save relationships between users in Neo4j nosql database.",
+  "subtasks": [
+    {
+      "name": "Setup comfort test environment",
+      "description": "This may improve the quality of the code and allow you take advantage of neo4j without installation."
+    },
+    {
+      "name": "Implement controller and service",
+      "description": "Implement controller and service logic that you have implemented in same tasks with mongodb and cassandra."
+    },
+    {
+      "name": "Implement dao",
+      "description": "Implement dao with neo4j."
+    }
+  ],
+  "category": "neo4j"
+}
